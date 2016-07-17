@@ -7,7 +7,7 @@ namespace BrokenAzureForms.Droid
 {
 	public class DroidUserService : IUserService
 	{
-		const string applicationURL = @"https://loginsalesbackend.azurewebsites.net";
+		const string applicationURL = @"YOUR-AZURE-APP-SERVICE-URL-HERE";
 
 		private MobileServiceClient _client;
 		private MobileServiceUser _user;
