@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Android.Content;
 using Microsoft.WindowsAzure.MobileServices;
 
 [assembly: Xamarin.Forms.Dependency(typeof(BrokenAzureForms.Droid.DroidUserService))]
@@ -11,6 +12,8 @@ namespace BrokenAzureForms.Droid
 
 		private MobileServiceClient _client;
 		private MobileServiceUser _user;
+
+		public static Context Context { get; set; }
 
 		public DroidUserService()
 		{
@@ -28,9 +31,14 @@ namespace BrokenAzureForms.Droid
 
 		public async Task<bool> LoginWithAzureAD()
 		{
+			if (Context == null)
+			{
+				return false;
+			}
+			
 			try
 			{
-				_user = await _client.LoginAsync(Xamarin.Forms.Forms.Context, MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory);
+				_user = await _client.LoginAsync(Context, MobileServiceAuthenticationProvider.WindowsAzureActiveDirectory);
 			}
 			catch (Exception)
 			{
